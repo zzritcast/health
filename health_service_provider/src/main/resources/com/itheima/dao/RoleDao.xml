@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.dao.RoleDao">
+
+    <resultMap id="role" type="com.itheima.pojo.Role">
+        <id column="id" property="id"></id>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="keyword" column="keyword"/>
+    </resultMap>
+    <resultMap id="roleAndPermission" type="com.itheima.pojo.Role" extends="role">
+        <collection property="permissions" column="id" select="com.itheima.dao.PermissionDao.findByRid"
+                    ofType="com.itheima.pojo.Permission"></collection>
+    </resultMap>
+
+    <!--根据用户ID查询关联的角色-->
+    <select id="findByUserId" parameterType="int" resultType="com.itheima.pojo.Role">
+        select r.*
+          from t_role r,t_user_role ur
+          where r.id = ur.role_id and ur.user_id = #{user_id}
+    </select>
+
+    <insert id="insertPermissIds">
+        insert into t_role_permission (role_id,permission_id) values
+        <foreach collection="permissionIds" item="pid" separator=",">
+            (#{rid},#{pid})
+        </foreach>
+    </insert>
+    <delete id="deletePermissionByRid">
+        delete from t_role_permission where role_id = #{rid}
+    </delete>
+
+    <select id="findRoleByUid" parameterType="int" resultMap="roleAndPermission">
+        select * from t_role role where  role.id in ( select r.role_id from t_user_role r where r.user_id = #{id})
+    </select>
+    <select id="findAll" resultType="com.itheima.pojo.Role">
+        select * from t_role
+    </select>
+    <select id="findAllByCondition" resultType="com.itheima.pojo.Role">
+        select * from t_role where name like concat('%',#{condition},'%')
+    </select>
+
+
+    <!--//加入角色
+
+    void roleAdd(Permission permission);-->
+    <insert id="roleAdd" parameterType="com.itheima.pojo.Role">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_role (name,keyword,description) values (#{name},#{keyword},#{description})
+    </insert>
+    <!--//中间表
+
+    void addRoleAndPer(Integer permissionId, Integer id);-->
+
+    <insert id="addRoleAndPer">
+        insert into t_role_permission (role_id,permission_id) values (#{roleId},#{permissionId});
+
+    </insert>
+
+    <!--deleteById-->
+    <delete id="deleteById">
+        delete from t_role where id = #{rid}
+    </delete>
+</mapper>

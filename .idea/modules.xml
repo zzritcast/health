@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../freemarkerdemo/freemarkerdemo.iml" filepath="$PROJECT_DIR$/../freemarkerdemo/freemarkerdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/health_backend/health_backend.iml" filepath="$PROJECT_DIR$/health_backend/health_backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/health_common/health_common.iml" filepath="$PROJECT_DIR$/health_common/health_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/health_interface/health_interface.iml" filepath="$PROJECT_DIR$/health_interface/health_interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/health_jobs/health_jobs.iml" filepath="$PROJECT_DIR$/health_jobs/health_jobs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/health_mobile/health_mobile.iml" filepath="$PROJECT_DIR$/health_mobile/health_mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/health_parent.iml" filepath="$PROJECT_DIR$/health_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/health_service_provider/health_service_provider.iml" filepath="$PROJECT_DIR$/health_service_provider/health_service_provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../itextDemo/itextDemo.iml" filepath="$PROJECT_DIR$/../itextDemo/itextDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../jasperReportsDemo/jasperReportsDemo.iml" filepath="$PROJECT_DIR$/../jasperReportsDemo/jasperReportsDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../quartz_demo/quartz_demo.iml" filepath="$PROJECT_DIR$/../quartz_demo/quartz_demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../redisdemo/redisdemo.iml" filepath="$PROJECT_DIR$/../redisdemo/redisdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../spring_security_demo/spring_security_demo.iml" filepath="$PROJECT_DIR$/../spring_security_demo/spring_security_demo.iml" />
+    </modules>
+  </component>
+</project>

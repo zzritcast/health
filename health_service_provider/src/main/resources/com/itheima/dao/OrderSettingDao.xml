@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.dao.OrderSettingDao">
+
+    <!--通过excel批量加入-->
+    <insert id="add" parameterType="com.itheima.pojo.OrderSetting">
+        insert into t_ordersetting
+      		(orderDate,number,reservations)
+                      values
+      		(#{orderDate},#{number},#{reservations})
+    </insert>
+    <!--根据日期更新限定的预约人数-->
+    <update id="editNumberByOrderDate" parameterType="com.itheima.pojo.OrderSetting">
+        update t_ordersetting
+        <set>
+            <if test="number != null">
+                number = #{number},
+            </if>
+            <if test="reservations != null">
+                reservations = #{reservations},
+            </if>
+        </set>
+          where orderDate = #{orderDate}
+    </update>
+    <!--通过日期查询  返回记录数-->
+    <select id="findCountByOrderDate" parameterType="date" resultType="long">
+        select count(id) from t_ordersetting where orderDate = #{orderDate}
+    </select>
+
+    <!--根据日期范围查询-->
+    <select id="getOrderSettingByMonth" parameterType="map" resultType="com.itheima.pojo.OrderSetting">
+        select * from t_ordersetting where orderDate between #{begin} and #{end}
+    </select>
+
+
+    <!--根据预约日期更新已预约人数-->
+    <update id="editReservationsByOrderDate" parameterType="com.itheima.pojo.OrderSetting">
+        update t_ordersetting set reservations = #{reservations} where orderDate = #{orderDate}
+    </update>
+
+    <!--根据日期查询预约设置信息-->
+    <!--通过日期查询  返回套餐对象-->
+    <select id="findByOrderDate" parameterType="date" resultType="com.itheima.pojo.OrderSetting">
+        select * from t_ordersetting where orderDate = #{orderDate}
+    </select>
+
+    <!--//通过预约id查询单个对象-->
+    <select id="findByOrderId" resultType="com.itheima.pojo.OrderSetting" parameterType="int">
+        select * from t_ordersetting where orderDate = ( SELECT orderDate FROM t_order WHERE id = #{id})
+    </select>
+
+    <!--selectByCondition 分页-->
+    <!--动态查询检查项数据-->
+    <select id="selectByCondition" parameterType="String" resultType="com.itheima.pojo.OrderSetting">
+        select * from t_ordersetting
+        <if test="value != null and value.length > 0">
+            where number = #{value} or reservations = #{value}
+        </if>
+    </select>
+</mapper>
